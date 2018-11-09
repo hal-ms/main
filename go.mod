@@ -1,4 +1,4 @@
-module github.com/hal-ms/monitor
+module github.com/hal-ms/main
 
 require (
 	github.com/gin-gonic/gin v1.3.0

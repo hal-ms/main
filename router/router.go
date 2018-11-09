@@ -4,11 +4,14 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/hal-ms/main/socket"
+
 	"github.com/gin-gonic/gin"
 )
 
 func GetRouter() *gin.Engine {
 	r := gin.Default()
+
 	r.Use(cros)
 	r.GET("/alive", func(c *gin.Context) {
 		c.Status(http.StatusOK)
@@ -16,8 +19,15 @@ func GetRouter() *gin.Engine {
 	r.Static("/_nuxt", "./spa/dist/_nuxt")
 	r.LoadHTMLGlob("spa/dist/200.html")
 	r.NoRoute(func(c *gin.Context) {
-		c.HTML(http.StatusOK,"200.html",nil)
+		c.HTML(http.StatusOK, "200.html", nil)
 	})
+	r.GET("/socket.io/", func(c *gin.Context) {
+		socket.Server.ServeHTTP(c.Writer, c.Request)
+	})
+	r.POST("/socket.io/", func(c *gin.Context) {
+		socket.Server.ServeHTTP(c.Writer, c.Request)
+	})
+
 	apiRouter(r.Group("/api"))
 	return r
 }
