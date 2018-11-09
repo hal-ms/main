@@ -13,6 +13,11 @@ func GetRouter() *gin.Engine {
 	r.GET("/alive", func(c *gin.Context) {
 		c.Status(http.StatusOK)
 	})
+	r.Static("/_nuxt", "./spa/dist/_nuxt")
+	r.LoadHTMLGlob("spa/dist/200.html")
+	r.NoRoute(func(c *gin.Context) {
+		c.HTML(http.StatusOK,"200.html",nil)
+	})
 	apiRouter(r.Group("/api"))
 	return r
 }
