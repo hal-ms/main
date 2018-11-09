@@ -27,8 +27,10 @@ func GetRouter() *gin.Engine {
 	r.POST("/socket.io/", func(c *gin.Context) {
 		socket.Server.ServeHTTP(c.Writer, c.Request)
 	})
-
-	apiRouter(r.Group("/api"))
+	api := r.Group("/api")
+	game := api.Group("/game")
+	apiRouter(api)
+	gameRouter(game)
 	return r
 }
 
