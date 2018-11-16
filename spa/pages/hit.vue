@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import io from "socket.io-client";
 export default {
   data() {
     return {
@@ -10,10 +11,17 @@ export default {
         "http://static-maquia.hpplus.jp/upload/image/manager/25/EGIXA1Q-1200.jpg"
     };
   },
-  mounted() {}
+  mounted() {
+    this.socket = io("https://socket.patra.store", {
+      transports: ["websocket"]
+    });
+    this.socket.on("hit", msg => {
+      this.img = JSON.parse(msg).img;
+    });
+  }
 };
 </script>
-
+  
 <style>
 img {
   width: 100%;
