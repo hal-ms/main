@@ -1,11 +1,10 @@
-development:
+2development:
   port: :8000
   dbhost: staging-shard-00-00-ylaoy.mongodb.net:27017,staging-shard-00-01-ylaoy.mongodb.net:27017,staging-shard-00-02-ylaoy.mongodb.net:27017
   database: ms
   dbUser: develop
   dbPassword: develop
   slack_url: https://hooks.slack.com/services/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
-
 
 
 production:

@@ -1,8 +1,17 @@
 package repo
 
 import (
+	"net/http"
+	"strings"
+
+	"github.com/makki0205/log"
+
+	"github.com/gin-gonic/gin/json"
+
+	"github.com/gin-gonic/gin"
+
 	"github.com/hal-ms/job/model"
-	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -37,4 +46,12 @@ func (j *jobRepo) All() model.Jobs {
 	var jobs = make(model.Jobs, 0)
 	j.C.Find(nil).All(&jobs)
 	return jobs
+}
+
+func (j *jobRepo) Create(jobName, UserName string) {
+	b, err := json.Marshal(gin.H{"name": jobName, "user_name": UserName})
+	if err != nil {
+		log.Err(err)
+	}
+	http.Post("https://hal-iot.net/api/job/masui", "application/json", strings.NewReader(string(b)))
 }
