@@ -9,5 +9,5 @@ func gameRouter(game *gin.RouterGroup) {
 	game.GET("/start", cnt.GameStart)
 	game.GET("/check", cnt.GameCheck)
 	game.GET("/end", cnt.GameEnd)
-
+	game.GET("/is_wearing/:IsWearing", cnt.IsWearing)
 }

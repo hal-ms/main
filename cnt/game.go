@@ -10,7 +10,6 @@ import (
 )
 
 func GameStart(c *gin.Context) {
-	repo.Job.All()
 	a := repo.Job.All().IsDone(false).SortByCreated()
 
 	// TODO スタート処理
