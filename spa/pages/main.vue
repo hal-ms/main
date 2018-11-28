@@ -1,11 +1,16 @@
 <template>
- <ul id="v-for-object" class="task-boxs">
-  <li v-for="(value, index) in jobs" :key="index" class="task-box" :class="{ remove: value.id === removeId, add: index === 0 && isAdd }">
-    {{ value.id }}
-    {{ value.user_name }}
-    {{ value.display_name }}
-  </li>
-</ul>
+  <ul id="v-for-object" class="task-boxs">
+    <li
+      v-for="(value, index) in jobs"
+      :key="index"
+      class="task-box"
+      :class="{ remove: value.id === removeId, add: index === 0 && isAdd }"
+      :style="{'background-color':value.image_color}"
+    >
+      <p class="job-name">{{ value.display_name }}</p>
+      <p class="user-name">{{ value.user_name }}</p>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -16,7 +21,8 @@ export default {
       foo: "hoge",
       jobs: [],
       removeId: null,
-      isAdd: false
+      isAdd: false,
+      test: "#abc"
     };
   },
   mounted() {
@@ -63,6 +69,14 @@ html {
   width: 100%;
   height: 100%;
 }
+
+body {
+  background-image: url("~assets/main_back.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 0 0;
+}
+
 *,
 *::before,
 *::after {
@@ -77,15 +91,30 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  font-family: "M PLUS Rounded 1c";
+  font-size: 1.5rem;
 }
 
 .task-box {
   list-style: none;
-  width: 40vw;
+  width: 68vw;
   height: 30vw;
-  background-color: burlywood;
   border: 1px solid dimgrey;
+  border-radius: 7vw;
 }
+.job-name {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 7vw;
+}
+.user-name {
+  font-size: 1rem;
+  text-align: right;
+  margin-top: 3vw;
+  margin-right: 3vw;
+}
+
+/* アニメーション */
 .task-box.remove {
   animation-name: slide_out;
   animation-duration: 1s;
