@@ -1,21 +1,22 @@
 <template>
-<div id="container">
-  <div id="roop"></div>
-  <div id="title-container">
-    <div id="title">お仕事の依頼はこちらから！</div>
-    <div id="logo">
-      <img src="~assets/logo.png" alt="三日坊主のロゴ">
+  <div id="container">
+    <audio src="https://hal-iot.net/public/vanilla.mp3" loop></audio>
+    <div id="roop"></div>
+    <div id="title-container">
+      <div id="title">お仕事の依頼はこちらから！</div>
+      <div id="logo">
+        <img src="~assets/logo.png" alt="三日坊主のロゴ">
+      </div>
+    </div>
+    <div id="truck-container">
+      <div id="truck" :class="{ move: isMove }">
+        <img src="~assets/truck.png" alt="トラックの画像">
+        <div id="qr-code-container">
+          <qrcode-vue :value="url" size="180" level="H"></qrcode-vue>
+        </div>
+      </div>
     </div>
   </div>
-  <div id="truck-container">
-    <div id="truck" :class="{ move: isMove }">
-    <img src="~assets/truck.png" alt="トラックの画像">
-    <div id="qr-code-container">
-      <qrcode-vue :value="url" size="180" level="H"></qrcode-vue>
-    </div>
-  </div>
-  </div>
-</div>
 </template>
 
 <script>
@@ -46,13 +47,13 @@ export default {
     GetToken: function() {
       axios.get("https://hal-iot.net/api/token").then(res => {
         this.isMove = true;
-        console.log("move")
+        console.log("move");
         setTimeout(() => {
           this.url = "https://hal-iot.net/create/" + res.data.id;
           console.log(res.data.id);
-          console.log("move end")
-          this.isMove = false
-        }, 3000)
+          console.log("move end");
+          this.isMove = false;
+        }, 3000);
       });
     }
   }
@@ -68,7 +69,7 @@ export default {
 #roop {
   width: 100%;
   height: 600px;
-  background: url('~assets/background.png') repeat-x;
+  background: url("~assets/background.png") repeat-x;
   background-position: 0 0;
   background-size: auto 600px;
   -webkit-animation: bgroop 20s linear infinite;
@@ -76,7 +77,7 @@ export default {
 }
 @-webkit-keyframes bgroop {
   from {
-    background-position: 0  0;
+    background-position: 0 0;
   }
   to {
     background-position: 1839px 0;
@@ -105,14 +106,30 @@ export default {
   animation-fill-mode: forwards;
 }
 @keyframes fluffy {
-  0% { transform:translateY(0) }
-  5% { transform:translateY(0) }
-  10% { transform:translateY(-5px) }
-  20% { transform:translateY(0) }
-  25% { transform:translateY(0) }
-  30% { transform:translateY(-10px) }
-  50% { transform:translateY(0) }
-  100% { transform:translateY(0) }
+  0% {
+    transform: translateY(0);
+  }
+  5% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-5px);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 #truck img {
   display: block;
@@ -164,7 +181,7 @@ export default {
 }
 #title {
   font-size: 50px;
-  color: #114F97;
+  color: #114f97;
 }
 #logo {
   width: 350px;
@@ -173,6 +190,5 @@ export default {
   display: block;
   width: 100%;
 }
-
 </style>
 
