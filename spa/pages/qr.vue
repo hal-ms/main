@@ -1,21 +1,25 @@
 <template>
-  <div id="container">
-    <audio src="https://hal-iot.net/public/vanilla.mp3" loop></audio>
-    <div id="roop"></div>
-    <div id="title-container">
-      <div id="title">お仕事の依頼はこちらから！</div>
-      <div id="logo">
-        <img src="~assets/logo.png" alt="三日坊主のロゴ">
+  <div>
+    <div id="container">
+      <div id="roop"></div>
+      <div id="title-container">
+        <div id="title">お仕事の依頼はこちらから！</div>
+        <div id="logo">
+          <img src="~assets/logo.png" alt="三日坊主のロゴ">
+        </div>
       </div>
-    </div>
-    <div id="truck-container">
-      <div id="truck" :class="{ move: isMove }">
-        <img src="~assets/truck.png" alt="トラックの画像">
-        <div id="qr-code-container">
-          <qrcode-vue :value="url" size="180" level="H"></qrcode-vue>
+      <div id="truck-container">
+        <div id="truck" :class="{ move: isMove }">
+          <img src="~assets/truck.png" alt="トラックの画像">
+          <div id="qr-code-container">
+            <qrcode-vue :value="url" size="180" level="H"></qrcode-vue>
+          </div>
         </div>
       </div>
     </div>
+    <audio autoplay>
+      <source src="https://hal-iot.net/public/vanilla.mp3" type="audio/mpeg">Your browser does not support the audio element.
+    </audio>
   </div>
 </template>
 
@@ -52,6 +56,7 @@ export default {
           this.url = "https://hal-iot.net/create/" + res.data.id;
           console.log(res.data.id);
           console.log("move end");
+          document.querySelector("audio").play();
           this.isMove = false;
         }, 3000);
       });
@@ -61,6 +66,9 @@ export default {
 </script>
 
 <style>
+audio {
+  height: 30px;
+}
 #container {
   position: relative;
   width: 100%;
