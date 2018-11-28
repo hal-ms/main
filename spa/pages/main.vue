@@ -49,7 +49,7 @@ export default {
           this.removeId = this.jobs[this.jobs.length - 1].id;
           setTimeout(() => {
             this.jobs = newJobs;
-          }, 1000);
+          }, 350);
         }
         if (this.jobs.length < newJobs.length) {
           this.jobs = newJobs;
@@ -71,7 +71,7 @@ html {
 }
 
 body {
-  background-image: url("~assets/main_back.png");
+  background-image: url("~assets/main_back.svg");
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: 0 0;
@@ -101,14 +101,16 @@ body {
   height: 30vw;
   border: 1px solid dimgrey;
   border-radius: 7vw;
+  opacity: 0.95;
+  box-shadow: 20px 20px 40px;
 }
 .job-name {
-  font-size: 2rem;
+  font-size: 5rem;
   text-align: center;
   margin-top: 7vw;
 }
 .user-name {
-  font-size: 1rem;
+  font-size: 3rem;
   text-align: right;
   margin-top: 3vw;
   margin-right: 3vw;
@@ -117,7 +119,7 @@ body {
 /* アニメーション */
 .task-box.remove {
   animation-name: slide_out;
-  animation-duration: 1s;
+  animation-duration: 0.6s;
 }
 
 @keyframes slide_out {
