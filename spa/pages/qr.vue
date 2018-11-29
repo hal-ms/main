@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <audio>
+    <audio ref="audio">
       <source src="https://hal-iot.net/public/vanilla.mp3" type="audio/mpeg">Your browser does not support the audio element.
     </audio>
   </div>
@@ -56,7 +56,7 @@ export default {
           this.url = "https://hal-iot.net/create/" + res.data.id;
           console.log(res.data.id);
           console.log("move end");
-          document.querySelector("audio").play();
+          this.$refs.audio.play();
           this.isMove = false;
         }, 3000);
       });

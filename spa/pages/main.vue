@@ -1,20 +1,26 @@
 <template>
-  <ul id="v-for-object" class="task-boxs">
-    <li
-      v-for="(value, index) in jobs"
-      :key="index"
-      class="task-box"
-      :class="{ remove: value.id === removeId, add: index === 0 && isAdd }"
-      :style="{'background-color':value.image_color}"
-    >
-      <p class="job-name">{{ value.display_name }}</p>
-      <p class="user-name">{{ value.user_name }}</p>
-    </li>
-  </ul>
+  <div>
+    <ul id="v-for-object" class="task-boxs">
+      <li
+        v-for="(value, index) in jobs"
+        :key="index"
+        class="task-box"
+        :class="{ remove: value.id === removeId, add: index === 0 && isAdd }"
+        :style="{'background-color':value.image_color}"
+      >
+        <p class="job-name">{{ value.display_name }}</p>
+        <p class="user-name">{{ value.user_name }}</p>
+      </li>
+    </ul>
+    <audio ref="audio">
+      <source ref="source" :src="se" type="audio/mpeg">Your browser does not support the audio element.
+    </audio>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import io from "socket.io-client";
 export default {
   data() {
     return {
@@ -22,7 +28,8 @@ export default {
       jobs: [],
       removeId: null,
       isAdd: false,
-      test: "#abc"
+      test: "#abc",
+      se: ""
     };
   },
   mounted() {
@@ -31,10 +38,17 @@ export default {
         .reverse()
         .slice(0, 7)
         .reverse();
-      // this.jobs.reverse();
-      // this.jobs = this.jobs.slice(0, 5);
     });
     setInterval(this.change, 500);
+    // 効果音
+    this.socket = io("https://socket.patra.store", {
+      transports: ["websocket"]
+    });
+    this.socket.on("se", msg => {
+      this.se = msg;
+      this.$refs.audio.load();
+      this.$refs.audio.play();
+    });
   },
   methods: {
     change() {
@@ -91,14 +105,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  font-family: "M PLUS Rounded 1c";
+  font-family: "Kosugi Maru", sans-serif;
   font-size: 1.5rem;
 }
 
 .task-box {
   list-style: none;
   width: 68vw;
-  height: 30vw;
+  height: 14vh;
   border: 1px solid dimgrey;
   border-radius: 7vw;
   opacity: 0.95;
@@ -107,12 +121,13 @@ body {
 .job-name {
   font-size: 5rem;
   text-align: center;
-  margin-top: 7vw;
+  margin-top: 4vh;
+  font-weight: bold;
 }
 .user-name {
   font-size: 3rem;
   text-align: right;
-  margin-top: 3vw;
+  margin-top: 2.5vw;
   margin-right: 3vw;
 }
 

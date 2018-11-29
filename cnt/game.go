@@ -30,10 +30,12 @@ func GameCheck(c *gin.Context) {
 }
 
 func GameEnd(c *gin.Context) {
-	service.Led.SetAll(255, 255, 0)
+	go func() {
+		service.Led.SetAll(255, 255, 0)
+	}()
 	a := repo.Job.All().IsDone(false).SortByCreated()
 	if len(a) <= 3 {
-		service.CreateRandomJob(2)
+		service.CreateRandomJob(1)
 	}
 	if len(a) <= 0 {
 		log.SendSlack("jobがありません")
