@@ -19,6 +19,7 @@ type ledService struct {
 func init() {
 	res := ledService{}
 	res.url = config.Env("led_url")
+	Led = res
 }
 
 func (l *ledService) SetAll(r, g, b uint8) {
