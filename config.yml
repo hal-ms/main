@@ -6,3 +6,4 @@ development:
   dbPassword: develop
   slack_url: https://hooks.slack.com/services/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
   moving_url: localhost:7000
+  led_url: 172.20.10.13:8000
