@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <audio autoplay>
+    <audio>
       <source src="https://hal-iot.net/public/vanilla.mp3" type="audio/mpeg">Your browser does not support the audio element.
     </audio>
   </div>
@@ -183,7 +183,7 @@ audio {
 
 #title-container {
   position: absolute;
-  top: 0;
+  top: 30px;
   left: 0;
   padding: 20px;
 }
