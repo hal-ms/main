@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/makki0205/config"
@@ -48,7 +47,6 @@ func (m *movingHedService) send(url string) {
 		_, err := http.Get(url)
 		if err != nil {
 			log.Err(err)
-			fmt.Println(err)
 		}
 	}()
 

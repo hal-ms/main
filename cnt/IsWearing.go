@@ -29,14 +29,19 @@ func IsWearing(c *gin.Context) {
 	service.Hit.Load()
 
 	// ゲームへの送信雑実装
-	_, err := http.Post(config.Env("game_url")+"/is_wearing/"+c.Param("IsWearing"), "", nil)
-	if err != nil {
-		log.Err(err)
-		fmt.Println(err)
-	}
+	go func() {
+		_, err := http.Post(config.Env("game_url")+"/is_wearing/"+c.Param("IsWearing"), "", nil)
+		if err != nil {
+			log.Err(err)
+			fmt.Println(err)
+		}
+	}()
 
 	// ムービングヘッドへの送信
 	service.MovingHed.IsWear(flg)
+
+	// SE
+	service.SE.IsWare(flg)
 
 	// ビルへの送信
 	c.JSON(http.StatusOK, "ok")
