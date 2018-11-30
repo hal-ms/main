@@ -28,6 +28,12 @@ github.com/makki0205/log v0.0.0-20181130011146-a4bf59238e58 h1:JKvx4QRTy/Id/6KXJ
 github.com/makki0205/log v0.0.0-20181130011146-a4bf59238e58/go.mod h1:UfUzLZMgnTUYldF4lRdrm28ovIaoYgLLbAmWqdx7Ga4=
 github.com/makki0205/log v0.0.0-20181130012141-ec0554ee7767 h1:S6XEiIm/l7RWPPV5JsS1/00txVjDMk2q5MYpaGfRvn4=
 github.com/makki0205/log v0.0.0-20181130012141-ec0554ee7767/go.mod h1:UfUzLZMgnTUYldF4lRdrm28ovIaoYgLLbAmWqdx7Ga4=
+github.com/makki0205/log v0.0.0-20181130012945-906e43494e2a h1:dfc2xelhCV7pthkIBR9S0wSS+zdi9lmFNVcvbbqYvZQ=
+github.com/makki0205/log v0.0.0-20181130012945-906e43494e2a/go.mod h1:UfUzLZMgnTUYldF4lRdrm28ovIaoYgLLbAmWqdx7Ga4=
+github.com/makki0205/log v0.0.0-20181130013043-b496b7f0ffd2 h1:7NjRO3EUbvMqhu6uJveFMjNl8B3QHwFFyt49RaafEnQ=
+github.com/makki0205/log v0.0.0-20181130013043-b496b7f0ffd2/go.mod h1:UfUzLZMgnTUYldF4lRdrm28ovIaoYgLLbAmWqdx7Ga4=
+github.com/makki0205/log v0.0.0-20181130013252-5bd75003dc5a h1:/IdOWbby/1kvCGZ8WY5lL3uU8rSuMnp7SesyTbs+uT0=
+github.com/makki0205/log v0.0.0-20181130013252-5bd75003dc5a/go.mod h1:UfUzLZMgnTUYldF4lRdrm28ovIaoYgLLbAmWqdx7Ga4=
 github.com/mattn/go-isatty v0.0.4 h1:bnP0vzxcAdeI1zdubAl5PjU6zsERjGZb7raWodagDYs=
 github.com/mattn/go-isatty v0.0.4/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=

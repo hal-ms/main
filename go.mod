@@ -7,6 +7,6 @@ require (
 	github.com/hal-ms/game v0.0.0-20181127090214-1e5dad098df4
 	github.com/hal-ms/job v0.0.0-20181129162243-edb29660db6b
 	github.com/makki0205/config v0.0.0-20180305065030-70207588bbb4
-	github.com/makki0205/log v0.0.0-20181130012141-ec0554ee7767
+	github.com/makki0205/log v0.0.0-20181130013252-5bd75003dc5a
 	gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce
 )
