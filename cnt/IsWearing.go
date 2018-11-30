@@ -24,13 +24,20 @@ func IsWearing(c *gin.Context) {
 		flg = true
 	}
 
-	// かぶったor帽子とった処理
+	// 帽子をかぶった処理
 	store.IsWare = flg
 	service.Hit.Load()
+
+	// ゲームへの送信雑実装
 	_, err := http.Post(config.Env("game_url")+"/is_wearing/"+c.Param("IsWearing"), "", nil)
 	if err != nil {
 		log.Err(err)
 		fmt.Println(err)
 	}
+
+	// ムービングヘッドへの送信
+	service.MovingHed.IsWear(flg)
+
+	// ビルへの送信
 	c.JSON(http.StatusOK, "ok")
 }

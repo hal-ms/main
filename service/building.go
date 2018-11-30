@@ -28,8 +28,12 @@ func (l *ledService) SetAll(r, g, b uint8) {
 		G uint8 `json:"g"`
 		B uint8 `json:"b"`
 	}{r, g, b})
-	_, err := http.Post(l.url+"/", "application/json", bytes.NewReader(req))
-	if err != nil {
-		log.Err(err)
-	}
+	go func() {
+		_, err := http.Post(l.url+"/", "application/json", bytes.NewReader(req))
+		if err != nil {
+			log.Err(err)
+
+		}
+	}()
+
 }
