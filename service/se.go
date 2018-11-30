@@ -18,6 +18,13 @@ func (s *seService) send(name string) {
 	}
 }
 
+func (s *seService) Kan() {
+	s.send("caaaan")
+}
+func (s *seService) Clear() {
+	s.send("clear")
+}
+
 func (s *seService) IsWare(f bool) {
 	if f {
 		s.send("wear")

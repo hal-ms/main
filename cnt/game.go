@@ -45,17 +45,16 @@ func GameEnd(c *gin.Context) {
 	}
 	now := a[len(a)-1]
 	now.Done = true
-	repo.Job.Update(now)
 
 	// LED 完了アニメーション
 	service.Led.SetAll(6)
 	// ムービングヘッド
 	service.MovingHed.Dool()
 	// TODO 終了SE
-
+	service.SE.Clear()
 	go func() {
 		//演出終了待ち
-		time.Sleep(4000 + time.Second)
+		time.Sleep(4 * time.Second)
 		// LED 完了アニメーション
 		service.Led.SetAll(10)
 		// ムービングヘッド
@@ -63,6 +62,12 @@ func GameEnd(c *gin.Context) {
 		//ヒット画面
 		store.IsStandby = true
 		service.Hit.Load()
+
+		repo.Job.Update(now)
+		time.Sleep(400 * time.Microsecond)
+
+		// SE
+		service.SE.Kan()
 	}()
 	c.JSON(http.StatusOK, "ok")
 }
