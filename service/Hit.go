@@ -2,7 +2,6 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/hal-ms/main/store"
@@ -50,6 +49,5 @@ func (i *hitService) send(image string) {
 	if err != nil {
 		log.Err(err)
 	}
-	fmt.Println("https://socket.patra.store/emit/hit?data=" + string(b))
 	http.Get("https://socket.patra.store/emit/hit?data=" + string(b))
 }
