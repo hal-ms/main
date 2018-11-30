@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/hal-ms/main/store"
+	"github.com/makki0205/log"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hal-ms/game/log"
 	"github.com/hal-ms/main/repo"
 	"github.com/hal-ms/main/service"
 )
@@ -21,7 +21,7 @@ func GameStart(c *gin.Context) {
 	store.IsStandby = false
 	service.Hit.Load()
 	// ビルのLED
-	service.Led.SetAll(255, 0, 0)
+	service.Led.SetAll(14)
 	// ムービングヘッド
 	service.MovingHed.Player()
 	// SE
@@ -42,14 +42,13 @@ func GameEnd(c *gin.Context) {
 	}
 	if len(a) <= 0 {
 		log.SendSlack("jobがありません")
-		panic("jobがありません")
 	}
 	now := a[len(a)-1]
 	now.Done = true
 	repo.Job.Update(now)
 
 	// LED 完了アニメーション
-	service.Led.SetAll(255, 0, 255)
+	service.Led.SetAll(6)
 	// ムービングヘッド
 	service.MovingHed.Dool()
 	// TODO 終了SE
@@ -58,7 +57,7 @@ func GameEnd(c *gin.Context) {
 		//演出終了待ち
 		time.Sleep(4000 + time.Second)
 		// LED 完了アニメーション
-		service.Led.SetAll(0, 0, 255)
+		service.Led.SetAll(10)
 		// ムービングヘッド
 		service.MovingHed.Standby()
 		//ヒット画面

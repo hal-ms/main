@@ -5,6 +5,6 @@ development:
   dbUser: develop
   dbPassword: develop
   slack_url: https://hooks.slack.com/services/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
-  moving_url: http://192.168.0.7:5000
+  moving_url: http://192.168.0.6:5000
   led_url: http://192.168.0.2:8000
-  game_url: http://192.168.0.10:8080
+  game_url: http://192.168.0.5:8080

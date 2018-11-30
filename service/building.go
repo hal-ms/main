@@ -1,9 +1,8 @@
 package service
 
 import (
-	"bytes"
-	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/makki0205/log"
 
@@ -22,14 +21,9 @@ func init() {
 	Led = res
 }
 
-func (l *ledService) SetAll(r, g, b uint8) {
-	req, _ := json.Marshal(struct {
-		R uint8 `json:"r"`
-		G uint8 `json:"g"`
-		B uint8 `json:"b"`
-	}{r, g, b})
+func (l *ledService) SetAll(scene uint8) {
 	go func() {
-		_, err := http.Post(l.url+"/", "application/json", bytes.NewReader(req))
+		_, err := http.Post(l.url+"/"+strconv.Itoa(int(scene)), "application/json", nil)
 		if err != nil {
 			log.Err(err)
 
