@@ -85,7 +85,7 @@ html {
 }
 
 body {
-  background-image: url("~assets/main_back.svg");
+  background-image: url("~assets/main_back2.svg");
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: 0 0;
