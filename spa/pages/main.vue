@@ -8,8 +8,13 @@
         :class="{ remove: value.id === removeId, add: index === 0 && isAdd }"
         :style="{'background-color':value.image_color}"
       >
-        <p class="job-name">{{ value.display_name }}</p>
-        <p class="user-name">{{ value.user_name }}</p>
+        <div class="user-icon">
+          <img :src="value.image_icon" alt>
+        </div>
+        <div class="task-box-right">
+          <p class="job-name">{{ value.display_name }}</p>
+          <p class="user-name">{{ value.user_name }}</p>
+        </div>
       </li>
     </ul>
     <audio ref="audio">
@@ -107,9 +112,13 @@ body {
   justify-content: flex-end;
   font-family: "Kosugi Maru", sans-serif;
   font-size: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 .task-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   list-style: none;
   width: 68vw;
   height: 14vh;
@@ -118,9 +127,20 @@ body {
   opacity: 0.95;
   box-shadow: 20px 20px 40px;
 }
+.task-box-right {
+  flex: 1;
+}
+.user-icon {
+  width: 10vw;
+  height: 10vw;
+  margin: 0 5vw;
+}
+.user-icon img {
+  display: block;
+  width: 100%;
+}
 .job-name {
   font-size: 5rem;
-  text-align: center;
   margin-top: 4vh;
   font-weight: bold;
 }
@@ -128,7 +148,7 @@ body {
   font-size: 3rem;
   text-align: right;
   margin-top: 2.5vw;
-  margin-right: 3vw;
+  margin-right: 7vw;
 }
 
 /* アニメーション */

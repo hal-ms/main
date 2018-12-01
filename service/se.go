@@ -2,6 +2,9 @@ package service
 
 import (
 	"net/http"
+	"strconv"
+
+	"github.com/hal-ms/main/store"
 
 	"github.com/makki0205/log"
 )
@@ -25,6 +28,9 @@ func (s *seService) Clear() {
 	s.send("clear")
 }
 
+func (s *seService) Game(scene int) {
+	s.send("cut_" + store.Job + "_" + strconv.Itoa(scene))
+}
 func (s *seService) IsWare(f bool) {
 	if f {
 		s.send("wear")

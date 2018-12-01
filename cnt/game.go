@@ -2,7 +2,10 @@ package cnt
 
 import (
 	"net/http"
+	"strconv"
 	"time"
+
+	"github.com/hal-ms/main/cnt/util"
 
 	"github.com/hal-ms/main/store"
 	"github.com/makki0205/log"
@@ -21,16 +24,34 @@ func GameStart(c *gin.Context) {
 	store.IsStandby = false
 	service.Hit.Load()
 	// ビルのLED
-	service.Led.SetAll(14)
+	service.Led.SetAll(21)
 	// ムービングヘッド
-	service.MovingHed.Player()
+	service.MovingHed.Game(1)
 	// SE
 	c.JSON(http.StatusOK, a[len(a)-1])
 
 }
 
 func GameCheck(c *gin.Context) {
-
+	scene, err := strconv.Atoi(c.Param("scene"))
+	if err != nil {
+		util.BadRequest(err.Error(), c)
+	}
+	switch scene {
+	case 1:
+		// ビル
+		service.Led.SetAll(20)
+		// スポットライト
+		service.MovingHed.Game(2)
+		break
+	case 2:
+		// ビル
+		service.Led.SetAll(19)
+		// スポットライト
+		service.MovingHed.Game(3)
+		break
+	}
+	service.SE.Game(scene)
 }
 
 func GameEnd(c *gin.Context) {
@@ -47,7 +68,7 @@ func GameEnd(c *gin.Context) {
 	now.Done = true
 
 	// LED 完了アニメーション
-	service.Led.SetAll(6)
+	service.Led.SetAll(0)
 	// ムービングヘッド
 	service.MovingHed.Dool()
 	// TODO 終了SE
@@ -56,7 +77,7 @@ func GameEnd(c *gin.Context) {
 		//演出終了待ち
 		time.Sleep(4 * time.Second)
 		// LED 完了アニメーション
-		service.Led.SetAll(10)
+		service.Led.SetAll(16)
 		// ムービングヘッド
 		service.MovingHed.Standby()
 		//ヒット画面

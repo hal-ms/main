@@ -2,6 +2,7 @@ package service
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/makki0205/config"
 	"github.com/makki0205/log"
@@ -38,8 +39,8 @@ func (m *movingHedService) Player() {
 func (m *movingHedService) Standby() {
 	m.send(m.url + "/standby")
 }
-func (m *movingHedService) Game() {
-	m.send(m.url + "/game")
+func (m *movingHedService) Game(scene int) {
+	m.send(m.url + "/game/" + strconv.Itoa(scene))
 }
 
 func (m *movingHedService) send(url string) {
