@@ -47,6 +47,8 @@ func IsWearing(c *gin.Context) {
 	// SE
 	service.SE.IsWare(flg)
 
+	// BGM
+	service.BGM.IsWare(flg)
 	// ビルへの送信
 	c.JSON(http.StatusOK, "ok")
 }

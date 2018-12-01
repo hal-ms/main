@@ -19,15 +19,20 @@ func GameStart(c *gin.Context) {
 	a := repo.Job.All().IsDone(false).SortByCreated()
 
 	// TODO スタート処理
+
 	// hit画面
 	store.Job = a[len(a)-1].Name
 	store.IsStandby = false
 	service.Hit.Load()
+	// BGM
+	service.BGM.Game()
 	// ビルのLED
 	service.Led.SetAll(21)
 	// ムービングヘッド
 	service.MovingHed.Game(1)
 	// SE
+	service.SE.Start()
+
 	c.JSON(http.StatusOK, a[len(a)-1])
 
 }
@@ -51,14 +56,17 @@ func GameCheck(c *gin.Context) {
 		service.MovingHed.Game(3)
 		break
 	}
-	service.SE.Game(scene)
+	go func() {
+		time.Sleep(800 * time.Microsecond)
+		service.SE.Game(scene)
+	}()
 }
 
 func GameEnd(c *gin.Context) {
 
 	// DBの書き換え
 	a := repo.Job.All().IsDone(false).SortByCreated()
-	if len(a) <= 3 {
+	if len(a) <= 1 {
 		service.CreateRandomJob(1)
 	}
 	if len(a) <= 0 {
@@ -66,14 +74,18 @@ func GameEnd(c *gin.Context) {
 	}
 	now := a[len(a)-1]
 	now.Done = true
-
+	service.BGM.Stop()
 	// LED 完了アニメーション
 	service.Led.SetAll(0)
 	// ムービングヘッド
 	service.MovingHed.Dool()
-	// TODO 終了SE
-	service.SE.Clear()
+
 	go func() {
+		time.Sleep(3 * time.Second)
+		// BGM停止
+		service.BGM.Stop()
+		// 終了SE
+		service.SE.Clear()
 		//演出終了待ち
 		time.Sleep(4 * time.Second)
 		// LED 完了アニメーション
@@ -89,6 +101,8 @@ func GameEnd(c *gin.Context) {
 
 		// SE
 		service.SE.Kan()
+		time.Sleep(1 * time.Second)
+		service.BGM.Standby()
 	}()
 	c.JSON(http.StatusOK, "ok")
 }

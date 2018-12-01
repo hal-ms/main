@@ -18,7 +18,10 @@
       </div>
     </div>
     <audio ref="audio">
-      <source src="https://hal-iot.net/public/vanilla.mp3" type="audio/mpeg">Your browser does not support the audio element.
+      <source src="https://hal-iot.net/public/se/truck.mp3" type="audio/mpeg">Your browser does not support the audio element.
+    </audio>
+    <audio ref="audio2">
+      <source ref="source" :src="bgm" type="audio/mpeg">Your browser does not support the audio element.
     </audio>
   </div>
 </template>
@@ -32,7 +35,8 @@ export default {
   data() {
     return {
       url: "",
-      isMove: false
+      isMove: false,
+      bgm: ""
     };
   },
   components: {
@@ -44,7 +48,14 @@ export default {
       transports: ["websocket"]
     });
     this.socket.on("qr", msg => {
+      this.$refs.audio.play();
       this.GetToken();
+    });
+    this.socket.on("bgm", msg => {
+      console.log(msg);
+      this.bgm = msg;
+      this.$refs.audio2.load();
+      this.$refs.audio2.play();
     });
   },
   methods: {
@@ -56,7 +67,6 @@ export default {
           this.url = "https://hal-iot.net/create/" + res.data.id;
           console.log(res.data.id);
           console.log("move end");
-          this.$refs.audio.play();
           this.isMove = false;
         }, 3000);
       });

@@ -21,6 +21,10 @@ func (s *seService) send(name string) {
 	}
 }
 
+func (s *seService) Start() {
+	s.send("start")
+}
+
 func (s *seService) Kan() {
 	s.send("caaaan")
 }

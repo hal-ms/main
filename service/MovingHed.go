@@ -29,7 +29,7 @@ func (m *movingHedService) IsWear(f bool) {
 	m.send(m.url + "/wear/" + fstr)
 }
 func (m *movingHedService) Dool() {
-	m.send(m.url + "/doll")
+	m.send(m.url + "/clear")
 }
 func (m *movingHedService) Player() {
 	m.send(m.url + "/player")
