@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on:click="GameStart">
     <div id="container">
       <div id="roop"></div>
       <div id="title-container">
@@ -19,9 +19,6 @@
     </div>
     <audio ref="audio">
       <source src="https://hal-iot.net/public/se/truck.mp3" type="audio/mpeg">Your browser does not support the audio element.
-    </audio>
-    <audio ref="audio2">
-      <source ref="source" :src="bgm" type="audio/mpeg">Your browser does not support the audio element.
     </audio>
   </div>
 </template>
@@ -59,6 +56,11 @@ export default {
     });
   },
   methods: {
+    GameStart() {
+      axios.get("https://hal-iot.net/api/config").then(res => {
+        axios.post(res.data.url.game + "/button");
+      });
+    },
     GetToken: function() {
       axios.get("https://hal-iot.net/api/token").then(res => {
         this.isMove = true;

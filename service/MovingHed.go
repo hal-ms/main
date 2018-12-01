@@ -35,6 +35,9 @@ func (m *movingHedService) Player() {
 	m.send(m.url + "/player")
 
 }
+func (m *movingHedService) Kan() {
+	m.send(m.url + "/kan")
+}
 
 func (m *movingHedService) Standby() {
 	m.send(m.url + "/standby")

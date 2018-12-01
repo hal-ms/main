@@ -22,10 +22,10 @@ func IsWearing(c *gin.Context) {
 	}
 	if c.Param("IsWearing") == "true" {
 		flg = true
-		service.Led.SetAll(14)
+		service.Led.Run()
 
 	} else {
-		service.Led.SetAll(255)
+		service.Led.Stop()
 	}
 
 	// 帽子をかぶった処理

@@ -101,7 +101,9 @@ func GameEnd(c *gin.Context) {
 
 		// SE
 		service.SE.Kan()
-		time.Sleep(1 * time.Second)
+
+		time.Sleep(2 * time.Second)
+		service.Led.SetAll(255)
 		service.BGM.Standby()
 	}()
 	c.JSON(http.StatusOK, "ok")
