@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       img:
-        "http://static-maquia.hpplus.jp/upload/image/manager/25/EGIXA1Q-1200.jpg",
+        "https://hal-iot.net/public/hit/no_wear/standby.jpg",
       bgm: ""
     };
   },

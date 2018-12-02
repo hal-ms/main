@@ -25,7 +25,7 @@ func GameStart(c *gin.Context) {
 	store.IsStandby = false
 	service.Hit.Load()
 	// BGM
-	service.BGM.Game()
+	service.BGM.Load()
 	// ビルのLED
 	service.Led.SetAll(21)
 	// ムービングヘッド
@@ -81,30 +81,27 @@ func GameEnd(c *gin.Context) {
 	service.MovingHed.Dool()
 
 	go func() {
-		time.Sleep(3 * time.Second)
-		// BGM停止
+		time.Sleep(2 * time.Second)
 		service.BGM.Stop()
-		// 終了SE
 		service.SE.Clear()
-		//演出終了待ち
-		time.Sleep(4 * time.Second)
-		// LED 完了アニメーション
-		service.Led.SetAll(16)
-		// ムービングヘッド
-		service.MovingHed.Standby()
-		//ヒット画面
-		store.IsStandby = true
-		service.Hit.Load()
+		time.Sleep(6 * time.Second)
 
+		// カーン！！
 		repo.Job.Update(now)
 		time.Sleep(400 * time.Microsecond)
-
-		// SE
+		service.Led.SetAll(16)
+		service.MovingHed.Kan()
 		service.SE.Kan()
+		service.Boss.Kan()
 
-		time.Sleep(2 * time.Second)
+		// スタンバイ
+		time.Sleep(3 * time.Second)
 		service.Led.SetAll(255)
-		service.BGM.Standby()
+		service.MovingHed.Standby()
+		store.IsStandby = true
+		service.Hit.Load()
+		service.BGM.Load()
+
 	}()
 	c.JSON(http.StatusOK, "ok")
 }

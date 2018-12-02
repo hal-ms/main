@@ -28,7 +28,8 @@ var hitData = map[string][]string{
 
 func (i *hitService) Load() {
 	if store.IsStandby {
-		i.send("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZlmqxCcUMq5X3xmUl_y7dYJDBtOLUhG0io8oHwh4-5j6IXdr4ag")
+		i.send("https://hal-iot.net/public/hit/no_wear/standby.jpg")
+		return
 	}
 	i.Set(store.Job, store.IsWare)
 }

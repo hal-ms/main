@@ -22,24 +22,31 @@ func (s *bgmService) send(name string) {
 }
 
 func (b *bgmService) Standby() {
-	b.send("wait")
+	if store.IsWare {
+		b.send("wait")
+	} else {
+		b.send("nowait")
+	}
+}
+func (b *bgmService) StandbyNoWare() {
 }
 
 func (b *bgmService) Game() {
-	b.send(store.Job)
+	if store.IsWare {
+		b.send(store.Job)
+
+	} else {
+		b.Stop()
+	}
 }
 func (b *bgmService) Stop() {
 	b.send("")
 }
 
-func (b *bgmService) IsWare(f bool) {
-	if f {
-		if store.IsStandby {
-			b.Standby()
-		} else {
-			b.Game()
-		}
+func (b *bgmService) Load() {
+	if store.IsStandby {
+		b.Standby()
 	} else {
-		b.Stop()
+		b.Game()
 	}
 }
