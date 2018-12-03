@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/hal-ms/main/store"
+
 	"github.com/makki0205/config"
 	"github.com/makki0205/log"
 )
@@ -23,6 +25,9 @@ type movingHedService struct {
 
 func (m *movingHedService) IsWear(f bool) {
 	fstr := "false"
+	if store.IsStandby {
+		fstr = "true"
+	}
 	if f {
 		fstr = "true"
 	}
