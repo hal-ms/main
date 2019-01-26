@@ -90,8 +90,7 @@ func GameEnd(c *gin.Context) {
 		repo.Job.Update(now)
 		time.Sleep(400 * time.Microsecond)
 		service.Led.SetAll(16)
-		service.MovingHed.Standby()
-		//service.MovingHed.Kan()
+		service.MovingHed.Kan()
 		service.SE.Kan()
 		service.Boss.Kan()
 
